@@ -37,7 +37,6 @@ The platform provides a centralized digital ecosystem that connects all key stak
 
 ## ✨ What Makes AidLink Different?
 
-## 🌟 Why AidLink?
 
 AidLink is more than a donation platform.
 
