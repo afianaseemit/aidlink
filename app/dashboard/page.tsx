@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { auth, db } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
-
 import {
   collection,
   getDocs,
@@ -49,35 +48,11 @@ export default function DashboardPage() {
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, (user) => {
-
-    if (!user) {
-      router.replace("/login");
-      return;
-    }
-
-    setUserName(user.displayName || "User");
-    loadDashboard();
-    async function loadDashboard() {
-
-  if (!auth.currentUser) return;
-
-  try {
-
-    // your existing Firestore code
-
-  } catch (err) {
-    console.error(err);
-  }
-
-}
-
-  });
-
-  return () => unsubscribe();
-}, [router]);
-
+  // ✅ FIX: only ONE loadDashboard function now, defined outside useEffect.
+  // The duplicate empty loadDashboard() that used to live INSIDE the
+  // onAuthStateChanged callback has been removed. That was the bug:
+  // JavaScript function scoping meant the inner (empty) one was being
+  // called instead of this real one, so Firestore data was never fetched.
   async function loadDashboard() {
 
     try {
@@ -120,7 +95,8 @@ export default function DashboardPage() {
       );
 
       const donationData: any[] = [];
-            donationSnapshot.forEach((docSnap) => {
+
+      donationSnapshot.forEach((docSnap) => {
 
         const data = docSnap.data();
 
@@ -189,6 +165,24 @@ export default function DashboardPage() {
 
   }
 
+  useEffect(() => {
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+
+      if (!user) {
+        router.replace("/login");
+        return;
+      }
+
+      setUserName(user.displayName || "User");
+      loadDashboard();
+
+    });
+
+    return () => unsubscribe();
+
+  }, [router]);
+
   async function analyze() {
 
     setLoading(true);
@@ -224,183 +218,187 @@ export default function DashboardPage() {
 
     }
 
-  }return (
-  <main className="min-h-screen bg-slate-100 p-8">
+  }
 
-    <div className="mx-auto max-w-7xl">
+  return (
+    <main className="min-h-screen bg-slate-100 p-8">
 
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mx-auto max-w-7xl">
 
-        <div>
+        <div className="mb-8 flex items-center justify-between">
 
-          <h1 className="text-4xl font-bold text-slate-800">
-            Welcome, {userName}
-          </h1>
+          <div>
 
-          <p className="mt-2 text-slate-500">
-            AidLink Disaster Relief Dashboard
-          </p>
+            <h1 className="text-4xl font-bold text-slate-800">
+              Welcome, {userName}
+            </h1>
+
+            <p className="mt-2 text-slate-500">
+              AidLink Disaster Relief Dashboard
+            </p>
+
+          </div>
+
+          <LogoutButton />
 
         </div>
 
-        <LogoutButton />
+        <DashboardStats
+          users={users}
+          volunteers={volunteers}
+          donations={donations}
+          requests={requests}
+          organizations={organizations}
+        />
 
-      </div>
+        {/* AI */}
 
-      <DashboardStats
-        users={users}
-        volunteers={volunteers}
-        donations={donations}
-        requests={requests}
-        organizations={organizations}
-      />
+        <div className="mt-10 grid gap-8 lg:grid-cols-2">
 
-      {/* AI */}
+          <div className="rounded-3xl bg-white p-8 shadow">
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-2">
+            <div className="mb-5 flex items-center gap-3">
 
-        <div className="rounded-3xl bg-white p-8 shadow">
+              <Brain
+                className="text-blue-600"
+                size={34}
+              />
 
-          <div className="mb-5 flex items-center gap-3">
+              <h2 className="text-2xl font-bold">
+                AI Disaster Analysis
+              </h2>
 
-            <Brain
-              className="text-blue-600"
-              size={34}
+            </div>
+
+            <textarea
+              rows={10}
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              className="w-full rounded-xl border p-4"
             />
 
-            <h2 className="text-2xl font-bold">
-              AI Disaster Analysis
-            </h2>
+            <button
+              onClick={analyze}
+              disabled={loading}
+              className="mt-6 flex w-full items-center justify-center rounded-xl bg-blue-600 py-4 font-semibold text-white hover:bg-blue-700"
+            >
+
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 animate-spin" />
+                  Analyzing...
+                </>
+              ) : (
+                "Analyze with AI"
+              )}
+
+            </button>
 
           </div>
 
-          <textarea
-            rows={10}
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            className="w-full rounded-xl border p-4"
+          <AICard response={result} />
+
+        </div>
+
+        {/* Volunteers & Donations */}
+
+        <div className="mt-10 grid gap-8 lg:grid-cols-2">
+
+          <RecentVolunteers
+            volunteers={recentVolunteers}
           />
 
-          <button
-            onClick={analyze}
-            disabled={loading}
-            className="mt-6 flex w-full items-center justify-center rounded-xl bg-blue-600 py-4 font-semibold text-white hover:bg-blue-700"
-          >
-
-            {loading ? (
-              <>
-                <Loader2 className="mr-2 animate-spin" />
-                Analyzing...
-              </>
-            ) : (
-              "Analyze with AI"
-            )}
-
-          </button>
+          <RecentDonations
+            donations={recentDonations}
+          />
 
         </div>
 
-        <AICard response={result} />
+        {/* Help Requests */}
 
-      </div>
+        <div className="mt-10">
 
-      {/* Volunteers & Donations */}
+          <RecentRequests
+            requests={recentRequests}
+          />
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-2">
+        </div>
 
-        <RecentVolunteers
-          volunteers={recentVolunteers}
-        />
+        {/* Bottom Summary */}
 
-        <RecentDonations
-          donations={recentDonations}
-        />
+        <div className="mt-10 rounded-3xl bg-gradient-to-r from-blue-600 to-cyan-500 p-8 text-white shadow-xl">
 
-      </div>
+          <h2 className="text-3xl font-bold">
+            AidLink Dashboard
+          </h2>
 
-      {/* Help Requests */}
+          <p className="mt-3 max-w-3xl text-blue-100">
+            Monitor disaster relief activities, volunteers,
+            donations, organizations and emergency help
+            requests in real time using AI-powered insights.
+          </p>
 
-      <div className="mt-10">
+          <div className="mt-8 grid gap-6 md:grid-cols-5">
 
-        <RecentRequests
-          requests={recentRequests}
-        />
+            <div>
 
-      </div>
+              <h3 className="text-4xl font-bold">
+                {users}
+              </h3>
 
-      {/* Bottom Summary */}
+              <p className="mt-2 text-blue-100">
+                Registered Users
+              </p>
 
-      <div className="mt-10 rounded-3xl bg-gradient-to-r from-blue-600 to-cyan-500 p-8 text-white shadow-xl">
+            </div>
 
-        <h2 className="text-3xl font-bold">
-          AidLink Dashboard
-        </h2>
+            <div>
 
-        <p className="mt-3 max-w-3xl text-blue-100">
-          Monitor disaster relief activities, volunteers,
-          donations, organizations and emergency help
-          requests in real time using AI-powered insights.
-        </p>
+              <h3 className="text-4xl font-bold">
+                {volunteers}
+              </h3>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-5">
+              <p className="mt-2 text-blue-100">
+                Volunteers
+              </p>
 
-          <div>
+            </div>
 
-            <h3 className="text-4xl font-bold">
-              {users}
-            </h3>
+            <div>
 
-            <p className="mt-2 text-blue-100">
-              Registered Users
-            </p>
+              <h3 className="text-4xl font-bold">
+                {donations}
+              </h3>
 
-          </div>
+              <p className="mt-2 text-blue-100">
+                Donations
+              </p>
 
-          <div>
+            </div>
 
-            <h3 className="text-4xl font-bold">
-              {volunteers}
-            </h3>
+            <div>
 
-            <p className="mt-2 text-blue-100">
-              Volunteers
-            </p>
+              <h3 className="text-4xl font-bold">
+                {requests}
+              </h3>
 
-          </div>
+              <p className="mt-2 text-blue-100">
+                Help Requests
+              </p>
 
-          <div>
+            </div>
 
-            <h3 className="text-4xl font-bold">
-              {donations}
-            </h3>
+            <div>
 
-            <p className="mt-2 text-blue-100">
-              Donations
-            </p>
+              <h3 className="text-4xl font-bold">
+                {organizations}
+              </h3>
 
-          </div>
+              <p className="mt-2 text-blue-100">
+                Organizations
+              </p>
 
-          <div>
-
-            <h3 className="text-4xl font-bold">
-              {requests}
-            </h3>
-
-            <p className="mt-2 text-blue-100">
-              Help Requests
-            </p>
-
-          </div>
-
-          <div>
-
-            <h3 className="text-4xl font-bold">
-              {organizations}
-            </h3>
-
-            <p className="mt-2 text-blue-100">
-              Organizations
-            </p>
+            </div>
 
           </div>
 
@@ -408,8 +406,6 @@ export default function DashboardPage() {
 
       </div>
 
-    </div>
-
-  </main>
-);
+    </main>
+  );
 }
