@@ -8,7 +8,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-4-38BDF8)
 ![Status](https://img.shields.io/badge/Project-Completed-success)
 
-### AidLink - An AI-Powered Disaster Relief Platform for Intelligent Coordination of Victims, Volunteers, Donors, and Relief Organizations
+### AidLink-An AI-Powered Disaster Relief Platform for Intelligent Coordination of Victims, Volunteers, Donors, and Relief Organizations
 
 </div>
 
