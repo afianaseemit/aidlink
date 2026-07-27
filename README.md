@@ -18,7 +18,11 @@
 You can view the live demo of this project here:
 Deployment Link
 
+
+Vercel
+https://aidlink-ten.vercel.app
 GitHub Repository
+https://github.com/afianaseemit/aidlink
 
 
 
@@ -27,7 +31,7 @@ GitHub Repository
 # 📌 Project Overview
 
 
-AidLink is an **AI-powered Disaster Relief and Humanitarian Assistance Platform** developed using **Next.js, Firebase, TypeScript, Tailwind CSS, and Google Gemini AI**.
+AidLink is an **AI-powered Disaster Relief and Humanitarian Assistance Platform** developed using **Next.js, Firebase, TypeScript, Tailwind CSS, and Groq API**.
 
 The platform provides a centralized digital ecosystem that connects all key stakeholders involved in disaster response, enabling faster coordination, efficient resource management, and intelligent humanitarian support.
 
@@ -265,8 +269,11 @@ Stores
 Stores
 
 - Donor Details
-- Donation Type
-- Amount
+- Category
+- Organization Selected
+- Items to donate
+- Pickup Address
+- Amount if Monetary Selected
 
 ---
 
@@ -353,26 +360,20 @@ NEXT_PUBLIC_FIREBASE_APP_ID=YOUR_APP_ID
 
 # 📷 Screenshots
 
-Add screenshots here after deployment.
-
-Example:
-
-```
-Home Page
-
-Dashboard
-
-Donate
-
-Volunteer
-
-Organizations
-
-Help Request
-
-Profile
-```
-
+![alt text](<WhatsApp Image 2026-07-27 at 6.57.15 PM.jpeg>)
+![alt text](image.png)
+![alt text](<WhatsApp Image 2026-07-27 at 6.57.54 PM.jpeg>)
+![alt text](<WhatsApp Image 2026-07-27 at 6.57.54 PM-1.jpeg>)
+![alt text](<WhatsApp Image 2026-07-27 at 6.57.54 PM-2.jpeg>)
+![alt text](<WhatsApp Image 2026-07-27 at 6.58.36 PM.jpeg>)
+![alt text](<WhatsApp Image 2026-07-27 at 7.00.58 PM.jpeg>)
+![alt text](<WhatsApp Image 2026-07-27 at 6.58.36 PM-1.jpeg>)
+![alt text](<WhatsApp Image 2026-07-27 at 6.58.52 PM.jpeg>)
+![alt text](<WhatsApp Image 2026-07-27 at 6.59.07 PM.jpeg>)
+![alt text](<WhatsApp Image 2026-07-27 at 6.59.07 PM-1.jpeg>)
+![alt text](<WhatsApp Image 2026-07-27 at 6.59.23 PM.jpeg>)
+![alt text](<WhatsApp Image 2026-07-27 at 7.00.31 PM.jpeg>)
+![alt text](<WhatsApp Image 2026-07-27 at 7.00.45 PM.jpeg>)
 ---
 
 # 🌐 Deployment
@@ -385,7 +386,7 @@ Project can be deployed using
 
 ## ⚠ Disclaimer
 
-AidLink is an academic project developed for educational purposes.
+AidLink is a project developed for educational purposes.
 
 Any payment methods, organizations, bank accounts, phone numbers, and other demonstration data included in this project are fictional placeholders unless explicitly integrated with verified services.
 
@@ -504,7 +505,7 @@ Enable:
 
 # 🎓 Academic Purpose
 
-This project was developed as part of a ACT AI Course By AI SkillBridge in partnership with HEC,PMYP,NAVTTC to demonstrate practical skills in:
+This project was developed as a part of  ACT AI Course By AI SkillBridge in partnership with HEC,PMYP,NAVTTC to demonstrate practical skills in:
 
 - Full Stack Web Development
 - Firebase Integration
@@ -524,7 +525,7 @@ BS Information Technology
 International Islamic University Islamabad
 
 GitHub:
-
+https://github.com/afianaseemit
 
 LinkedIn:
 
