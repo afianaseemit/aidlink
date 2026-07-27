@@ -13,6 +13,16 @@
 </div>
 
 ---
+## 🚀 Live Demo
+
+You can view the live demo of this project here:
+Deployment Link
+
+GitHub Repository
+
+
+
+
 
 # 📌 Project Overview
 
@@ -372,19 +382,7 @@ Project can be deployed using
 - Vercel
 - Firebase Hosting
 
-Deployment Link
 
-```
-https://your-project.vercel.app
-```
-
-GitHub Repository
-
-```
-https://github.com/YOUR_USERNAME/aidlink
-```
-
----
 ## ⚠ Disclaimer
 
 AidLink is an academic project developed for educational purposes.
@@ -506,7 +504,7 @@ Enable:
 
 # 🎓 Academic Purpose
 
-This project was developed as part of a BS Information Technology academic project to demonstrate practical skills in:
+This project was developed as part of a ACT AI Course By AI SkillBridge in partnership with HEC,PMYP,NAVTTC to demonstrate practical skills in:
 
 - Full Stack Web Development
 - Firebase Integration
@@ -527,12 +525,10 @@ International Islamic University Islamabad
 
 GitHub:
 
-https://github.com/YOUR_USERNAME
 
 LinkedIn:
 
-https://linkedin.com/in/YOUR_PROFILE
-
+https://www.linkedin.com/in/afia-naseem-85815a328/
 ---
 
 # 📜 License

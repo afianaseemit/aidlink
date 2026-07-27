@@ -68,7 +68,6 @@ export default function RecentDonations({
 
                   <div className="flex items-center gap-2 text-green-600">
 
-                    <DollarSign size={16} />
 
                     <span>
                       PKR {donation.amount}
