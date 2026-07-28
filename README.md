@@ -363,12 +363,8 @@ NEXT_PUBLIC_FIREBASE_APP_ID=YOUR_APP_ID
 
 ![alt text](<WhatsApp Image 2026-07-27 at 6.57.15 PM.jpeg>)
 ![alt text](image.png)
-![alt text](<WhatsApp Image 2026-07-27 at 6.57.54 PM.jpeg>)
-![alt text](<WhatsApp Image 2026-07-27 at 6.57.54 PM-1.jpeg>)
-![alt text](<WhatsApp Image 2026-07-27 at 6.57.54 PM-2.jpeg>)
 ![alt text](<WhatsApp Image 2026-07-27 at 6.58.36 PM.jpeg>)
 ![alt text](<WhatsApp Image 2026-07-27 at 7.00.58 PM.jpeg>)
-![alt text](<WhatsApp Image 2026-07-27 at 6.58.36 PM-1.jpeg>)
 ![alt text](<WhatsApp Image 2026-07-27 at 6.58.52 PM.jpeg>)
 ![alt text](<WhatsApp Image 2026-07-27 at 6.59.07 PM.jpeg>)
 ![alt text](<WhatsApp Image 2026-07-27 at 6.59.07 PM-1.jpeg>)
