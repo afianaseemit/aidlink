@@ -14,14 +14,9 @@
 </div>
 
 ---
-## 🚀 Live Demo
+##  Demo
 
 You can view the live demo of this project here:
-Deployment Link
-
-
-Vercel
-https://aidlink-ten.vercel.app
 GitHub Repository
 https://github.com/afianaseemit/aidlink
 
